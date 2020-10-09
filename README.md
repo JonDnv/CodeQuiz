@@ -2,7 +2,7 @@
 
 ---
 
-Description Goes Here
+A timed quiz for coding boot camp students that focuses on JavaScript fundamenmtals. The quiz is timed and allows high scores to be stored.
 
 ---
 
@@ -18,7 +18,7 @@ THEN time is subtracted from the clock \
 WHEN all questions are answered or the timer reaches 0 \
 THEN the game is over \
 WHEN the game is over \
-THEN I can save my initials and score \
+THEN I can save my initials and score
 
 ---
 
@@ -31,7 +31,7 @@ THEN I can save my initials and score \
 
 ## Mock-Up
 
-The following image shows the finished site:
+The following image shows the finished site: \
 ![Website]()
 
 ---
@@ -41,6 +41,8 @@ The following image shows the finished site:
 * Bootstrap
 * Font Awesome
 * Flexbox
+* [Fonticon](https://gauger.io/fonticon/)
+* 
 
 ---
 
