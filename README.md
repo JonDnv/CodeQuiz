@@ -49,4 +49,6 @@ The following image shows the finished site: \
 ## Change History
 
 1. Created Shell index.html, index.js, styles.css, & README.md files
-2. 
+2. Created Question & Answer Arrays
+3. Completed HTML & CSS files
+4. Started function declaration in index.js

@@ -52,9 +52,9 @@ var quizQuestions = {
     ],
     ["html", "javascript", "script", "js"],
     [
-      "The <head> section",
-      "The <body> section",
-      "Both the <head> and the <body> section",
+      "The head section",
+      "The body section",
+      "Both the head and the body section",
     ],
     [
       'alert("Hello World")',
@@ -89,10 +89,6 @@ var qIndex = [];
 var aIndex = [];
 //Start Time
 var testDuration = 180;
-// Declares Question Element Variable
-var qEl = document.querySelector(".question");
-// Declares Answer List Element Variable
-var choiceList = document.querySelector("#answers");
 // Declares Timer Element Variable
 var timeEl = document.querySelector(".timer");
 
@@ -111,7 +107,8 @@ function uniqueRandoms(qty, min, max) {
 }
 
 // Populates the Random Question Index Array
-qIndex = uniqueRandoms(
+qIndex = 
+uniqueRandoms(
   quizQuestions.questions.length,
   0,
   quizQuestions.questions.length
@@ -119,15 +116,8 @@ qIndex = uniqueRandoms(
 
 // Ask Random Question
 function askQuestion() {
-  // qEl.textContent = quizQuestions.questions[qIndex[0]];
-  var questionDiv = $("<p>");
-  questionDiv.text = quizQuestions.questions[qIndex[0]];
-  $("#question-container").append(questionDiv);
-  $("#questionDiv").attr("id","question");
-
-  console.log(questionDiv)
-  console.log(questionDiv.text)
-  console.log($("#question-container"))
+  var questionDiv = $("#question-container");
+  questionDiv.append('<p id="question">' + quizQuestions.questions[qIndex[0]] + '</p>')
 }
 
 // Removes Index Number from qIndex so Questions don't get asked again.
@@ -144,21 +134,12 @@ function randomAnswerIndex() {
 }
 
 function provideChoices() {
-  for (i = 0; i < quizQuestions.choices[qIndex[0]].length; i++) {
-    quizQuestions.choices[qIndex[0]][aIndex[i]];
+  for (var i = 0; i < quizQuestions.choices[qIndex[0]].length; i++) {
+    var choiceDiv = '<li><button type="button" class="btn btn-dark" id="answerChoices">'
+    choiceDiv = choiceDiv + quizQuestions.choices[qIndex[0]][aIndex[i]];
+    $("#answer-buttons").append(choiceDiv);
   }
-}
-
-function answerList() {
-  choiceList.innerHTML = "";
-
-  for (i = 0; i < quizQuestions.choices[qIndex[0]].length; i++) {
-    var li = document.createElement("li");
-    var btn = document.createElement("button")
-    li.textContent = quizQuestions.choices[qIndex[0]][aIndex[i]];
-    choiceList.appendChild(btn).appendChild(li);
   }
-}
 
 // Counts Down Timer
 function testCountdown() {
@@ -168,18 +149,19 @@ function testCountdown() {
 
     if (testDuration === 0) {
       clearInterval(timerInterval);
-      testOver();
     }
   }, 1000);
 }
 
-// Provides Feedback When Test is Over
-function testOver() {
-  if (qIndex.length === 0 || testDuration === 0) {
-  }
-}
+$("#answerChoices").click(function(){
+  var firedButton = $(this).val();
+  alert(firedButton);
+})
+
+
 
 testCountdown();
 askQuestion();
-// randomAnswerIndex();
-// answerList();
+randomAnswerIndex();
+provideChoices();
+

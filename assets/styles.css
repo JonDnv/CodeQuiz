@@ -29,34 +29,29 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-.answer-container {
+#answer-container {
   display: flex;
 }
 
-.answer {
+#answer-buttons {
   color: black;
-  flex-basis: 100%;
-  align-content: center;
   text-align: center;
   font-size: large;
   font-family: "IBM Plex Mono", monospace;
-}
-
-.answers {
-  display: flex;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 ul {
-  list-style-type: none;
   margin-top: 1rem;
 }
 
 li {
+  list-style-type: none;
   margin: 1rem;
 }
 
 #question-container {
-  font-family: "Roboto" sans-serif;
   display: flex;
 }
 
