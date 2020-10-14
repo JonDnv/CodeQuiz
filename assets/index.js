@@ -1,3 +1,4 @@
+//Question & Answer Object
 var quizQuestions = {
   questions: [
     "What term do you use to declare a variable?",
@@ -81,9 +82,22 @@ var quizQuestions = {
   ],
 };
 
-//https://stackoverflow.com/questions/8378870/generating-unique-random-numbers-integers-between-0-and-x
+//Variable Declaration
+//Random Question Index
 var qIndex = [];
+//Random Answer Index
+var aIndex = [];
+//Start Time
+var testDuration = 180;
+// Declares Question Element Variable
+var qEl = document.querySelector(".question");
+// Declares Answer List Element Variable
+var choiceList = document.querySelector("#answers");
+// Declares Timer Element Variable
+var timeEl = document.querySelector(".timer");
 
+// Unique Random Array Number Generator
+//https://stackoverflow.com/questions/8378870/generating-unique-random-numbers-integers-between-0-and-x
 function uniqueRandoms(qty, min, max) {
   var rnd,
     arr = [];
@@ -96,10 +110,76 @@ function uniqueRandoms(qty, min, max) {
   return arr;
 }
 
+// Populates the Random Question Index Array
 qIndex = uniqueRandoms(
   quizQuestions.questions.length,
   0,
   quizQuestions.questions.length
 );
 
+// Ask Random Question
+function askQuestion() {
+  // qEl.textContent = quizQuestions.questions[qIndex[0]];
+  var questionDiv = $("<p>");
+  questionDiv.text = quizQuestions.questions[qIndex[0]];
+  $("#question-container").append(questionDiv);
+  $("#questionDiv").attr("id","question");
 
+  console.log(questionDiv)
+  console.log(questionDiv.text)
+  console.log($("#question-container"))
+}
+
+// Removes Index Number from qIndex so Questions don't get asked again.
+function removeQuestion() {
+  qIndex.splice(0, 1);
+}
+
+function randomAnswerIndex() {
+  aIndex = uniqueRandoms(
+    quizQuestions.choices[qIndex[0]].length,
+    0,
+    quizQuestions.choices[qIndex[0]].length
+  );
+}
+
+function provideChoices() {
+  for (i = 0; i < quizQuestions.choices[qIndex[0]].length; i++) {
+    quizQuestions.choices[qIndex[0]][aIndex[i]];
+  }
+}
+
+function answerList() {
+  choiceList.innerHTML = "";
+
+  for (i = 0; i < quizQuestions.choices[qIndex[0]].length; i++) {
+    var li = document.createElement("li");
+    var btn = document.createElement("button")
+    li.textContent = quizQuestions.choices[qIndex[0]][aIndex[i]];
+    choiceList.appendChild(btn).appendChild(li);
+  }
+}
+
+// Counts Down Timer
+function testCountdown() {
+  var timerInterval = setInterval(function () {
+    testDuration--;
+    timeEl.textContent = testDuration + " Seconds Left";
+
+    if (testDuration === 0) {
+      clearInterval(timerInterval);
+      testOver();
+    }
+  }, 1000);
+}
+
+// Provides Feedback When Test is Over
+function testOver() {
+  if (qIndex.length === 0 || testDuration === 0) {
+  }
+}
+
+testCountdown();
+askQuestion();
+// randomAnswerIndex();
+// answerList();
