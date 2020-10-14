@@ -138,7 +138,7 @@ function provideChoices() {
     var choiceDiv = '<li><button type="button" class="btn btn-dark" id="answerChoices">'
     choiceDiv = choiceDiv + quizQuestions.choices[qIndex[0]][aIndex[i]];
     $("#answer-buttons").append(choiceDiv);
-  }
+    }
   }
 
 // Counts Down Timer
@@ -153,11 +153,10 @@ function testCountdown() {
   }, 1000);
 }
 
-$("#answerChoices").click(function(){
-  var firedButton = $(this).val();
-  alert(firedButton);
+$("#answer-buttons").on("click", "#answerChoices", function(){
+  var buttonText = $(this).html();
+  alert(buttonText)
 })
-
 
 
 testCountdown();
