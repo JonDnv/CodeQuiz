@@ -120,14 +120,14 @@ function askQuestion() {
     var questionDiv = $("#question-container");
     questionDiv.append('<p id="question">' + quizQuestions.questions[qIndex[0]] + '</p>')
   } else {
-    alert("Out of Questions")
+    outOfQuestions();
   }
 }
 
-// //Function for action when out of questions
-// outOfQuestions(){
-//   alert("Out of Question");
-// }
+//Function for action when out of questions
+function outOfQuestions() {
+  alert("Out of Question");
+}
 
 // Removed Question from Screen
 function deleteQuestion() {
@@ -172,17 +172,17 @@ function testCountdown() {
     testDuration--;
     timeEl.textContent = testDuration + " Seconds Left";
 
-    if (testDuration === 0) {
+    if (testDuration < 1) {
       clearInterval(timerInterval);
       outOfTime();
     }
   }, 1000);
 }
 
-// // Alerts Times Up
-// function outOfTime() {
-//   alert("Time's Up")
-// }
+// Alerts Times Up
+function outOfTime() {
+  alert("Time's Up")
+}
 
 // Hides Start Button After Click
 function hide() {

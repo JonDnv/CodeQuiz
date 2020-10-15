@@ -24,7 +24,7 @@ THEN I can save my initials and score
 
 ## Links
 
-* [Code Quiz]()
+* [Code Quiz](https://jondnv.github.io/CodeQuiz/)
 * [Github Repository](https://github.com/JonDnv/CodeQuiz)
 
 ---
@@ -32,7 +32,11 @@ THEN I can save my initials and score
 ## Mock-Up
 
 The following image shows the finished site: \
-![Website]()
+![Website Start Page]()
+
+![Sample Question Page]()
+
+![End of Quiz Page]()
 
 ---
 
