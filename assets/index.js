@@ -89,8 +89,12 @@ var qIndex = [];
 var aIndex = [];
 //Start Time
 var testDuration = 120;
+//Score Variable
+var score = 0;
 // Declares Timer Element Variable
 var timeEl = document.querySelector(".timer");
+// Declares Score Element Variable
+var scoreEl = document.querySelector(".score");
 
 // Unique Random Array Number Generator
 //https://stackoverflow.com/questions/8378870/generating-unique-random-numbers-integers-between-0-and-x
@@ -126,7 +130,13 @@ function askQuestion() {
 
 //Function for action when out of questions
 function outOfQuestions() {
-  alert("Out of Question");
+  testDuration = 0
+  $("#answer-buttons").html('<li><button type="button" class="btn btn-dark" id="completedButton">You\'ve Completed The Test!</button></li>');
+  setTimeout(function () {
+    $("#answer-buttons").html("");
+  }, 2500
+  );
+  finalScore();
 }
 
 // Removed Question from Screen
@@ -168,20 +178,50 @@ function deleteAnswers() {
 
 // Counts Down Timer
 function testCountdown() {
+  timeEl.textContent = testDuration + " Seconds Left";
   var timerInterval = setInterval(function () {
     testDuration--;
     timeEl.textContent = testDuration + " Seconds Left";
-
     if (testDuration < 1) {
+      timeEl.textContent = "";
       clearInterval(timerInterval);
       outOfTime();
     }
   }, 1000);
 }
 
+// Displays Player Score
+function scoreDisplay() {
+  scoreEl.textContent = "Score: " + score;
+  var scoreInterval = setInterval(function () {
+    scoreEl.textContent = "Score: " + score;
+    if (qIndex.length === 0 || testDuration < 1) {
+      scoreEl.textContent = "";
+      clearInterval(scoreInterval);
+    }
+  }, 500);
+}
+
 // Alerts Times Up
 function outOfTime() {
-  alert("Time's Up")
+  deleteQuestion();
+  deleteAnswers();
+  removeQuestion();
+  setTimeout(function () {
+    timesUpButton();
+  }, 200
+  )
+}
+
+// Creates Time's Up Button
+function timesUpButton() {
+  testDuration = 0
+  $("#answer-buttons").html('<li><button type="button" class="btn btn-dark" id="timesUpButton">Time\'s Up!</button></li>');
+  setTimeout(function () {
+    $("#answer-buttons").html("");
+  }, 2500
+  );
+  finalScore();
 }
 
 // Hides Start Button After Click
@@ -190,13 +230,19 @@ function hide() {
   hide.style.display = "none";
 }
 
+//Function Creates Button that Displays Final Score & Prompts User for Initials
+function finalScore() {
+
+}
+
 // Starts Quiz
 $("#startEndButton").on("click", "#startButton", function () {
   hide();
+  testCountdown();
+  scoreDisplay();
   askQuestion();
   randomAnswerIndex();
   provideChoices();
-  testCountdown();
 })
 
 // Answers Question & Moves On to Next Question
@@ -206,19 +252,23 @@ $("#answer-buttons").on("click", "#answerChoices", function () {
   console.log(quizQuestions.correctAnswer[qIndex[0]])
   if (buttonText === quizQuestions.correctAnswer[qIndex[0]]) {
     $(this).attr("id", "correct-answer");
+    score++
   }
   else {
     $(this).attr("id", "wrong-answer");
     testDuration = testDuration - 10;
   }
-  setTimeout(function () {
-    deleteQuestion();
-    deleteAnswers();
-    removeQuestion();
-    askQuestion();
-    randomAnswerIndex();
-    provideChoices();
-  }, 500
-  );
+
+  if (qIndex.length > 0 && testDuration > 0) {
+    setTimeout(function () {
+      deleteQuestion();
+      deleteAnswers();
+      removeQuestion();
+      askQuestion();
+      randomAnswerIndex();
+      provideChoices();
+    }, 500
+    );
+  }
 }
 )

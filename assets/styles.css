@@ -2,18 +2,18 @@ body {
   background-color: #d4d4d4;
 }
 
-.title-container {
+#title-container {
   display: flex;
 }
 
-.title-bar {
+#title-bar {
   background-color: #292929;
   color: #ffffff;
   padding: 5px;
   flex-basis: 100%;
   margin-bottom: 1rem;
   text-align: center;
-  font-size: medium;
+  font-size: xx-large;
   font-family: "Roboto", sans-serif;
 }
 
@@ -22,6 +22,18 @@ body {
 }
 
 .timer {
+  color: black;
+  flex-basis: 100%;
+  text-align: center;
+  font-size: large;
+  font-family: "Roboto", sans-serif;
+}
+
+.score-container {
+  display: flex;
+}
+
+.score {
   color: black;
   flex-basis: 100%;
   text-align: center;
@@ -70,9 +82,10 @@ li {
 }
 
 #startButton {
-  font-size: xx-large;
+  font-size: x-large;
   margin-left: auto;
   margin-right: auto;
+  background-color: #292929;
 }
 
 #correct-answer {
@@ -81,4 +94,20 @@ li {
 
 #wrong-answer {
   background-color: darkred;
+}
+
+#timesUpButton {
+  font-size: xx-large;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: darkred;
+  font-family: "Roboto", sans-serif;
+}
+
+#completedButton {
+  font-size: xx-large;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: green;
+  font-family: "Roboto", sans-serif;
 }
