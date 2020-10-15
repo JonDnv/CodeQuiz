@@ -64,3 +64,21 @@ li {
   font-family: "Roboto", sans-serif;
   margin-top: 1rem;
 }
+
+#startEndButton {
+  display: flex;
+}
+
+#startButton {
+  font-size: xx-large;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#correct-answer {
+  background-color: green;
+}
+
+#wrong-answer {
+  background-color: darkred;
+}
