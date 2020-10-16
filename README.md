@@ -31,7 +31,7 @@ THEN I can save my initials and score
 
 ## Mock-Up
 
-The following image shows the finished site: \
+The following images shows the finished site: \
 ![Website Start Page](./assets/Code-Quiz-Homepage.png)
 
 ![Sample Question Page](./assets/Code-Quiz-QSample.png)
@@ -56,3 +56,5 @@ The following image shows the finished site: \
 2. Created Question & Answer Arrays
 3. Completed HTML & CSS files
 4. Started function declaration in index.js
+5. Completed functions for quiz functionality
+6. Completed Local Storage Set Up for High Scores
