@@ -226,28 +226,40 @@ function outOfTime() {
 function timesUpButton() {
   if (qOrT === false) {
     testDuration = 0
-    $("#answer-buttons").html('<li><button type="button" class="btn btn-dark" id="timesUpButton">Time\'s Up!</button></li>');
-    setTimeout(function () {
-      $("#answer-buttons").html("");
-    }, 2500
-    );
+    var endDiv = '<li><button type="button" class="btn btn-dark" id="timesUpButton">Time\'s Up!</button></li>'
+    $("#answer-buttons").append(endDiv);
   }
 }
 
-// Hides Start Button After Click
-function hide() {
-  var hide = document.getElementById("startEndButton");
+// Hides Sections After Click
+function hide(hideEl) {
+  var hide = document.getElementById(hideEl);
   hide.style.display = "none";
 }
 
-//Function Creates Button that Displays Final Score & Prompts User for Initials
-function finalScore() {
-  alert(score);
+// Unhides Sections After Click
+function unhide(unhideEl) {
+  var unhide = document.getElementById(unhideEl);
+  unhide.style.display = "block";
 }
+
+// Ends Quiz When Time's Up
+$("#answer-buttons").on("click", "#timesUpButton", function () {
+  hide("answer-buttons");
+  unhide("initForm");
+
+
+  //   <form>
+  //     <div class="form-group">
+  //         <label for="initials">Enter Initials To Be Added To Leader Board</label>
+  //         <input type="text" class="form-control form-control-lg" id="initialsInput" placeholder="Initials" </div>
+  // </form>
+})
 
 // Starts Quiz
 $("#startEndButton").on("click", "#startButton", function () {
-  hide();
+  hide("startEndButton");
+  hide("leader-board");
   testCountdown();
   scoreDisplay();
   askQuestion();
@@ -258,8 +270,6 @@ $("#startEndButton").on("click", "#startButton", function () {
 // Answers Question & Moves On to Next Question
 $("#answer-buttons").on("click", "#answerChoices", function () {
   var buttonText = $(this).html();
-  console.log(buttonText)
-  console.log(quizQuestions.correctAnswer[qIndex[0]])
   if (buttonText === quizQuestions.correctAnswer[qIndex[0]]) {
     $(this).attr("id", "correct-answer");
     score++
