@@ -133,8 +133,8 @@ function askQuestion() {
 //Function for action when out of questions
 function outOfQuestions() {
   qOrT = true;
-  testDuration = 0;
   timeEl.textContent = "";
+  testDuration = 0;
   var endDiv = '<li><button type="button" class="btn btn-dark" id="completedButton">You\'ve Completed The Test!</button></li>'
   $("#answer-buttons").append(endDiv)
 }
@@ -243,16 +243,18 @@ function unhide(unhideEl) {
 // Ends Quiz When Time's Up
 $("#answer-buttons").on("click", "#timesUpButton", function () {
   hide("answer-buttons");
-  var finalScore = '<h4 id="finalScore">Your Final Score Was' + score + '.</h4>';
+  var finalScore = '<h4 id="finalScore">Your Final Score Was ' + score + '!</h4>';
   $("#final-score").append(finalScore);
+  unhide("finalScore");
   unhide("initForm");
 })
 
 // Ends Quiz When All Questions Are Answered
 $("#answer-buttons").on("click", "#completedButton", function () {
   hide("answer-buttons");
-  var finalScore = '<h4 id="finalScore">Your Final Score Was' + score + '.</h4>';
+  var finalScore = '<h4 id="finalScore">Your Final Score Was ' + score + '!</h4>';
   $("#final-score").append(finalScore);
+  unhide("finalScore");
   unhide("initForm");
 })
 
