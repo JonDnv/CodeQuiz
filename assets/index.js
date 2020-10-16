@@ -39,7 +39,7 @@ var quizQuestions = {
     ],
     ["1995", "2005", "2015", "2020"],
     [
-      "for (var i = 0; i < arr.length; i++)",
+      "for (var i = 0; i &lt; arr.length; i++)",
       "for (var i = 1; i < arr.length; i++)",
       "for i = 0; i++; i < arr.length",
       "for (var i = 0; i > arr.length; i--)",
@@ -74,7 +74,7 @@ var quizQuestions = {
     "True",
     "JavaScript Object Notation",
     "1995",
-    "for (var i = 0; i < arr.length; i++)",
+    "for (var i = 0; i &lt; arr.length; i++)",
     "A do while loop executes the script block once before entering the while loop",
     "script",
     "The body section",
@@ -95,6 +95,8 @@ var score = 0;
 var timeEl = document.querySelector(".timer");
 // Declares Score Element Variable
 var scoreEl = document.querySelector(".score");
+// Declares variable to determine if questions were answered before timer was up
+var qOrT = false;
 
 // Unique Random Array Number Generator
 //https://stackoverflow.com/questions/8378870/generating-unique-random-numbers-integers-between-0-and-x
@@ -130,13 +132,14 @@ function askQuestion() {
 
 //Function for action when out of questions
 function outOfQuestions() {
-  testDuration = 0
+  qOrT = true;
+  testDuration = 0;
+  timeEl.textContent = "";
   $("#answer-buttons").html('<li><button type="button" class="btn btn-dark" id="completedButton">You\'ve Completed The Test!</button></li>');
   setTimeout(function () {
     $("#answer-buttons").html("");
   }, 2500
   );
-  finalScore();
 }
 
 // Removed Question from Screen
@@ -151,28 +154,34 @@ function removeQuestion() {
 
 // Function orders answer choices randomly
 function randomAnswerIndex() {
-  aIndex = uniqueRandoms(
-    quizQuestions.choices[qIndex[0]].length,
-    0,
-    quizQuestions.choices[qIndex[0]].length
-  );
+  if (qIndex.length > 0) {
+    aIndex = uniqueRandoms(
+      quizQuestions.choices[qIndex[0]].length,
+      0,
+      quizQuestions.choices[qIndex[0]].length
+    );
+  }
 }
 
 // Function displays question choices
 function provideChoices() {
-  for (var i = 0; i < quizQuestions.choices[qIndex[0]].length; i++) {
-    var choiceDiv = '<li><button type="button" class="btn btn-dark" id="answerChoices">'
-    choiceDiv = choiceDiv + quizQuestions.choices[qIndex[0]][aIndex[i]];
-    $("#answer-buttons").append(choiceDiv);
+  if (qIndex.length > 0) {
+    for (var i = 0; i < quizQuestions.choices[qIndex[0]].length; i++) {
+      var choiceDiv = '<li><button type="button" class="btn btn-dark" id="answerChoices">'
+      choiceDiv = choiceDiv + quizQuestions.choices[qIndex[0]][aIndex[i]];
+      $("#answer-buttons").append(choiceDiv);
+    }
   }
 }
 
 // Deletes answers from Screen
 function deleteAnswers() {
-  for (var i = 0; i < quizQuestions.choices[qIndex[0]].length; i++) {
-    $("#answerChoices").replaceWith("");
-    $("#correct-answer").replaceWith("");
-    $("#wrong-answer").replaceWith("");
+  if (qIndex.length > 0) {
+    for (var i = 0; i < quizQuestions.choices[qIndex[0]].length; i++) {
+      $("#answerChoices").replaceWith("");
+      $("#correct-answer").replaceWith("");
+      $("#wrong-answer").replaceWith("");
+    }
   }
 }
 
@@ -215,13 +224,14 @@ function outOfTime() {
 
 // Creates Time's Up Button
 function timesUpButton() {
-  testDuration = 0
-  $("#answer-buttons").html('<li><button type="button" class="btn btn-dark" id="timesUpButton">Time\'s Up!</button></li>');
-  setTimeout(function () {
-    $("#answer-buttons").html("");
-  }, 2500
-  );
-  finalScore();
+  if (qOrT === false) {
+    testDuration = 0
+    $("#answer-buttons").html('<li><button type="button" class="btn btn-dark" id="timesUpButton">Time\'s Up!</button></li>');
+    setTimeout(function () {
+      $("#answer-buttons").html("");
+    }, 2500
+    );
+  }
 }
 
 // Hides Start Button After Click
@@ -232,7 +242,7 @@ function hide() {
 
 //Function Creates Button that Displays Final Score & Prompts User for Initials
 function finalScore() {
-
+  alert(score);
 }
 
 // Starts Quiz
