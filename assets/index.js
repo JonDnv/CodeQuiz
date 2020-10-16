@@ -135,11 +135,8 @@ function outOfQuestions() {
   qOrT = true;
   testDuration = 0;
   timeEl.textContent = "";
-  $("#answer-buttons").html('<li><button type="button" class="btn btn-dark" id="completedButton">You\'ve Completed The Test!</button></li>');
-  setTimeout(function () {
-    $("#answer-buttons").html("");
-  }, 2500
-  );
+  var endDiv = '<li><button type="button" class="btn btn-dark" id="completedButton">You\'ve Completed The Test!</button></li>'
+  $("#answer-buttons").append(endDiv)
 }
 
 // Removed Question from Screen
@@ -246,14 +243,17 @@ function unhide(unhideEl) {
 // Ends Quiz When Time's Up
 $("#answer-buttons").on("click", "#timesUpButton", function () {
   hide("answer-buttons");
+  var finalScore = '<h4 id="finalScore">Your Final Score Was' + score + '.</h4>';
+  $("#final-score").append(finalScore);
   unhide("initForm");
+})
 
-
-  //   <form>
-  //     <div class="form-group">
-  //         <label for="initials">Enter Initials To Be Added To Leader Board</label>
-  //         <input type="text" class="form-control form-control-lg" id="initialsInput" placeholder="Initials" </div>
-  // </form>
+// Ends Quiz When All Questions Are Answered
+$("#answer-buttons").on("click", "#completedButton", function () {
+  hide("answer-buttons");
+  var finalScore = '<h4 id="finalScore">Your Final Score Was' + score + '.</h4>';
+  $("#final-score").append(finalScore);
+  unhide("initForm");
 })
 
 // Starts Quiz
