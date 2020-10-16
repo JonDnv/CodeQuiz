@@ -32,11 +32,11 @@ THEN I can save my initials and score
 ## Mock-Up
 
 The following image shows the finished site: \
-![Website Start Page]()
+![Website Start Page](./assets/Code-Quiz-Homepage.png)
 
-![Sample Question Page]()
+![Sample Question Page](./assets/Code-Quiz-QSample.png)
 
-![End of Quiz Page]()
+![End of Quiz Page](./assets/Code-Quiz-End.png)
 
 ---
 
