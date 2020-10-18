@@ -47,6 +47,7 @@ The following images shows the finished site: \
 * Flexbox
 * [Fonticon](https://gauger.io/fonticon/)
 * [Stack Overflow](https://stackoverflow.com/questions/8378870/generating-unique-random-numbers-integers-between-0-and-x)
+* [w3schools](https://www.w3schools.com/js/js_quiz.asp)
 
 ---
 

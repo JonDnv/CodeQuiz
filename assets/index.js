@@ -98,7 +98,7 @@ var scoreEl = document.querySelector(".score");
 // Declares variable to determine if questions were answered before timer was up
 var qOrT = false;
 // Declare FinalScores variable to keep list of final scores for leader board
-var finalScores = ""
+var finalScores = "";
 
 // Unique Random Array Number Generator
 //https://stackoverflow.com/questions/8378870/generating-unique-random-numbers-integers-between-0-and-x
@@ -115,18 +115,19 @@ function uniqueRandoms(qty, min, max) {
 }
 
 // Populates the Random Question Index Array
-qIndex =
-  uniqueRandoms(
-    quizQuestions.questions.length,
-    0,
-    quizQuestions.questions.length
-  );
+qIndex = uniqueRandoms(
+  quizQuestions.questions.length,
+  0,
+  quizQuestions.questions.length
+);
 
 // Ask Random Question
 function askQuestion() {
   if (qIndex.length > 0) {
     var questionDiv = $("#question-container");
-    questionDiv.append('<p id="question">' + quizQuestions.questions[qIndex[0]] + '</p>')
+    questionDiv.append(
+      '<p id="question">' + quizQuestions.questions[qIndex[0]] + "</p>"
+    );
   } else {
     outOfQuestions();
   }
@@ -137,8 +138,9 @@ function outOfQuestions() {
   qOrT = true;
   timeEl.textContent = "";
   testDuration = 0;
-  var endDiv = '<li><button type="button" class="btn btn-dark" id="completedButton">You\'ve Completed The Test!</button></li>'
-  $("#answer-buttons").append(endDiv)
+  var endDiv =
+    '<li><button type="button" class="btn btn-dark" id="completedButton">You\'ve Completed The Test!</button></li>';
+  $("#answer-buttons").append(endDiv);
 }
 
 // Removed Question from Screen
@@ -166,7 +168,8 @@ function randomAnswerIndex() {
 function provideChoices() {
   if (qIndex.length > 0) {
     for (var i = 0; i < quizQuestions.choices[qIndex[0]].length; i++) {
-      var choiceDiv = '<li><button type="button" class="btn btn-dark" id="answerChoices">'
+      var choiceDiv =
+        '<li><button type="button" class="btn btn-dark" id="answerChoices">';
       choiceDiv = choiceDiv + quizQuestions.choices[qIndex[0]][aIndex[i]];
       $("#answer-buttons").append(choiceDiv);
     }
@@ -217,15 +220,15 @@ function outOfTime() {
   removeQuestion();
   setTimeout(function () {
     timesUpButton();
-  }, 200
-  )
+  }, 200);
 }
 
 // Creates Time's Up Button
 function timesUpButton() {
   if (qOrT === false) {
-    testDuration = 0
-    var endDiv = '<li><button type="button" class="btn btn-dark" id="timesUpButton">Time\'s Up!</button></li>'
+    testDuration = 0;
+    var endDiv =
+      '<li><button type="button" class="btn btn-dark" id="timesUpButton">Time\'s Up!</button></li>';
     $("#answer-buttons").append(endDiv);
   }
 }
@@ -245,20 +248,22 @@ function unhide(unhideEl) {
 // Ends Quiz When Time's Up
 $("#answer-buttons").on("click", "#timesUpButton", function () {
   hide("answer-buttons");
-  var finalScore = '<h4 id="finalScore">Your Final Score Was ' + score + '!</h4>';
+  var finalScore =
+    '<h4 id="finalScore">Your Final Score Was ' + score + "!</h4>";
   $("#final-score").append(finalScore);
   unhide("finalScore");
   unhide("initForm");
-})
+});
 
 // Ends Quiz When All Questions Are Answered
 $("#answer-buttons").on("click", "#completedButton", function () {
   hide("answer-buttons");
-  var finalScore = '<h4 id="finalScore">Your Final Score Was ' + score + '!</h4>';
+  var finalScore =
+    '<h4 id="finalScore">Your Final Score Was ' + score + "!</h4>";
   $("#final-score").append(finalScore);
   unhide("finalScore");
   unhide("initForm");
-})
+});
 
 // Starts Quiz
 $("#startEndButton").on("click", "#startButton", function () {
@@ -269,16 +274,15 @@ $("#startEndButton").on("click", "#startButton", function () {
   askQuestion();
   randomAnswerIndex();
   provideChoices();
-})
+});
 
 // Answers Question & Moves On to Next Question
 $("#answer-buttons").on("click", "#answerChoices", function () {
   var buttonText = $(this).html();
   if (buttonText === quizQuestions.correctAnswer[qIndex[0]]) {
     $(this).attr("id", "correct-answer");
-    score++
-  }
-  else {
+    score++;
+  } else {
     $(this).attr("id", "wrong-answer");
     testDuration = testDuration - 10;
   }
@@ -291,15 +295,13 @@ $("#answer-buttons").on("click", "#answerChoices", function () {
       askQuestion();
       randomAnswerIndex();
       provideChoices();
-    }, 500
-    );
+    }, 500);
   }
-}
-)
+});
 
 //Displays LeaderBoard only if objects exist
 $(document).ready(function () {
   if (finalScores !== "") {
     unhide("leader-board");
   }
-})
+});
