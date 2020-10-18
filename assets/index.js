@@ -98,7 +98,7 @@ var scoreEl = document.querySelector(".score");
 // Declares variable to determine if questions were answered before timer was up
 var qOrT = false;
 // Declare FinalScores variable to keep list of final scores for leader board
-var finalScores = "";
+var finalScores = localStorage.getItem("highScores");
 
 // Unique Random Array Number Generator
 //https://stackoverflow.com/questions/8378870/generating-unique-random-numbers-integers-between-0-and-x
@@ -301,7 +301,19 @@ $("#answer-buttons").on("click", "#answerChoices", function () {
 
 //Displays LeaderBoard only if objects exist
 $(document).ready(function () {
-  if (finalScores !== "") {
+  if (finalScores !== null) {
     unhide("leader-board");
   }
 });
+
+var name = []
+var scores = []
+
+$("#initials-form").on("click", "#init-submit", function () {
+  names.push(document.getElementById("initialsInput").value)
+
+  scores.push(score)
+
+  localStorage.setItem("names", JSON.stringify(names))
+  localStorage.setItem("highScores", JSON.stringify(scores))
+})
