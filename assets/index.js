@@ -305,7 +305,13 @@ $(document).ready(function () {
   if (highScores.length !== 0) {
     unhide("leader-board");
   }
+  for (i = 0; i < highScores.length; i++) {
+    var leaderDiv = '<li>' + highScores[i].userName + ' - ' + highScores[i].userScore + '</li>';
+    $("#leaderList").prepend(leaderDiv);
+  }
 });
+
+
 
 document.querySelector("#init-submit").onclick = function () {
   var name = document.querySelector("#initialsInput").value;
@@ -315,20 +321,3 @@ document.querySelector("#init-submit").onclick = function () {
 
   localStorage.setItem("highScores", JSON.stringify(highScores));
 }
-
-// $("#initials-form").on("click", "#init-submit", function () {
-//   finalNames.push(document.getElementById("initialsSubmit").value);
-//   finalScores.push(score);
-
-//   console.log(finalNames);
-//   console.log(finalScores);
-//   alert("works");
-
-//   //localStorage.setItem("names", JSON.stringify(finalNames));
-//   //localStorage.setItem("highScores", JSON.stringify(finalScores));
-
-//   //var userdata={name:"sam",score:0};
-//   //highscores.push(userdata)
-//   //highscore=[{name:"sam",score:0}, {name:"sue",score:10}]
-//   //highscore[0].name highscore[0].score
-// })
