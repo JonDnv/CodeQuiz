@@ -98,7 +98,8 @@ var scoreEl = document.querySelector(".score");
 // Declares variable to determine if questions were answered before timer was up
 var qOrT = false;
 // Declare FinalScores variable to keep list of final scores for leader board
-var finalScores = localStorage.getItem("highScores");
+var highScores = []
+if (JSON.parse(localStorage.getItem("highScores") !== null)) { highScores = JSON.parse(localStorage.getItem("highScores")); }
 
 // Unique Random Array Number Generator
 //https://stackoverflow.com/questions/8378870/generating-unique-random-numbers-integers-between-0-and-x
@@ -301,19 +302,33 @@ $("#answer-buttons").on("click", "#answerChoices", function () {
 
 //Displays LeaderBoard only if objects exist
 $(document).ready(function () {
-  if (finalScores !== null) {
+  if (highScores.length !== 0) {
     unhide("leader-board");
   }
 });
 
-var name = []
-var scores = []
+document.querySelector("#init-submit").onclick = function () {
+  var name = document.querySelector("#initialsInput").value;
+  var userData = { "userName": name, "userScore": score };
 
-$("#initials-form").on("click", "#init-submit", function () {
-  names.push(document.getElementById("initialsInput").value)
+  highScores.push(userData);
 
-  scores.push(score)
+  localStorage.setItem("highScores", JSON.stringify(highScores));
+}
 
-  localStorage.setItem("names", JSON.stringify(names))
-  localStorage.setItem("highScores", JSON.stringify(scores))
-})
+// $("#initials-form").on("click", "#init-submit", function () {
+//   finalNames.push(document.getElementById("initialsSubmit").value);
+//   finalScores.push(score);
+
+//   console.log(finalNames);
+//   console.log(finalScores);
+//   alert("works");
+
+//   //localStorage.setItem("names", JSON.stringify(finalNames));
+//   //localStorage.setItem("highScores", JSON.stringify(finalScores));
+
+//   //var userdata={name:"sam",score:0};
+//   //highscores.push(userdata)
+//   //highscore=[{name:"sam",score:0}, {name:"sue",score:10}]
+//   //highscore[0].name highscore[0].score
+// })
